@@ -13,3 +13,18 @@ export function getSession(json) {
     console.log(JSON.parse(sessionStorage.getItem(json)))
     return JSON.parse(sessionStorage.getItem(json));
 }
+
+export function postData(data, type) {
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    }).then(function (data) {
+        console.log('Request success: ', 'posten skapad');
+    })
+}
