@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import AuctionContainer from "./AuctionContainer";
 
 export default class NavBar extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class NavBar extends Component {
     render() {
         const viewAuctions = ( //change to components
             <div>
-                <p>test med viewAuctions!</p>
+                <AuctionContainer />
             </div>
         );
 
