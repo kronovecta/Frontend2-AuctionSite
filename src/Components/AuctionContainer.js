@@ -8,8 +8,9 @@ export default class AuctionContainer extends Component {
     createSession("auctionList", "auktion");
   }
 
-  handleAddBid(id) {
-      console.log("Bid added from ID:" + id)
+  handleAddBid = (e) => { // Generate new Bud into the API
+      e.preventDefault();
+      console.log(e.target.amount.value)
   }
 
   render() {
