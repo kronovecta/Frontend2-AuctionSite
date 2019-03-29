@@ -16,22 +16,22 @@ export default class NavBar extends Component {
 
     render() {
         const viewAuctions = (
-            <div>
+            <React.Fragment>
                 <AuctionContainer />
-            </div>
+            </React.Fragment>
         );
 
         const createAuctions = (
-            <div>
+            <React.Fragment>
                 <p>test med createAuctions!</p> {/* Component instead */}
-            </div>
+            </React.Fragment>
         );
 
         const container = (
-            <div>
+            <React.Fragment>
                 <button onClick={this.handleOnClick}>{this.state.showAuctions === true ? "Skapa ny auktion" : "Visa auktioner"}</button>
                 {this.state.showAuctions === true ? viewAuctions : createAuctions}
-            </div>
+            </React.Fragment>
         );
 
         return (container);

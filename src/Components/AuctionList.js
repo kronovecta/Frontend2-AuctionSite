@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Auction from './Auction';
+import { getSession } from '../api';
 
 export default class AuctionList extends Component {
     constructor(props) {
@@ -7,7 +8,8 @@ export default class AuctionList extends Component {
     }
 
     render() {
-        let auctionList = this.props.auctions.map((item) => {
+        let auctions = getSession("auctionList");
+        let auctionList = auctions.map((item) => {
             return <Auction data={item} key={item.AuktionID} />
         })
 

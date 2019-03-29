@@ -5,9 +5,9 @@ import NavBar from './Components/NavBar';
 class App extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <NavBar />
-      </div>
+      </React.Fragment>
     );
   }
 }
