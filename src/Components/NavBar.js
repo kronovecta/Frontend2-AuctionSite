@@ -15,15 +15,15 @@ export default class NavBar extends Component {
     }
 
     render() {
-        const viewAuctions = ( //change to components
+        const viewAuctions = (
             <div>
                 <AuctionContainer />
             </div>
         );
 
-        const createAuctions = ( //change to components
+        const createAuctions = (
             <div>
-                <p>test med createAuctions!</p>
+                <p>test med createAuctions!</p> {/* Component instead */}
             </div>
         );
 

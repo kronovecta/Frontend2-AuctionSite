@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Auction = ({data}) => {
+const Auction = ({ data }) => {
     let auctionItemStyle = {
         border: '1px solid lightgrey',
         padding: '1rem',

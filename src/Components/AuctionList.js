@@ -3,12 +3,11 @@ import Auction from './Auction';
 
 export default class AuctionList extends Component {
     constructor(props) {
-      super(props)
+        super(props)
     }
-    
+
     render() {
         let auctionList = this.props.auctions.map((item) => {
-            // console.log({item})
             return <Auction data={item} key={item.AuktionID} />
         })
 
