@@ -8,15 +8,26 @@ export default class AuctionList extends Component {
     }
 
     render() {
+        let auctionItemStyle = {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center'
+        }
+
         let auctions = getSession("auctionList");
-        let auctionList = auctions.map((item) => {
-            return <Auction data={item} key={item.AuktionID} />
-        })
+        let auctionList;
+        if(auctions != null) {
+            auctionList = auctions.map((item) => {
+                return <Auction handleAddBid={this.props.handleAddBid} data={item} key={item.AuktionID} />
+            })
+        } else {
+            // auctionList = []; // Error handling
+        }
 
         return (
-            <React.Fragment>
+            <div style={auctionItemStyle}>
                 {auctionList}
-            </React.Fragment>
+            </div>
         )
     }
 }

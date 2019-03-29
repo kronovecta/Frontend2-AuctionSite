@@ -8,10 +8,14 @@ export default class AuctionContainer extends Component {
     createSession("auctionList", "auktion");
   }
 
+  handleAddBid(id) {
+      console.log("Bid added from ID:" + id)
+  }
+
   render() {
     return (
       <React.Fragment>
-        <AuctionList />
+        <AuctionList handleAddBid={this.handleAddBid} />
       </React.Fragment>
     )
   }
