@@ -11,7 +11,8 @@ export default class AuctionList extends Component {
         let auctionItemStyle = {
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            flexWrap: 'wrap'
         }
 
         let auctions = getSession("auctionList");
