@@ -36,7 +36,7 @@ export default class CreateAuction extends Component {
             <input type="text" placeholder="Titel" id="Titel" onChange={this.handleChange} /> <br />
             <input type="text" placeholder="Beskrivning" id="Beskrivning" onChange={this.handleChange} /><br />
             <DatePicker selected={this.state.auction.StartDatum} id="StartDatum" onChange={this.handleChange} />
-            <DatePicker selected={this.state.auction.SlutDatum} id="SlutDatum" onChange={this.handleChange} />
+            <DatePicker selected={this.state.auction.SlutDatum} id="SlutDatum" onChange={this.handleChange} /><br />
             <input type="text" placeholder="Utropspris" id="Utropspris" onChange={this.handleChange} /><br />
             <input type="text" placeholder="Skapad av" id="SkapadAv" onChange={this.handleChange} />
             <button>Spara</button>
