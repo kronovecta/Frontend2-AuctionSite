@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import AuctionContainer from "./AuctionContainer";
+import CreateAuction from './CreateAuction';
 
 export default class NavBar extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class NavBar extends Component {
 
         const createAuctions = (
             <React.Fragment>
-                <p>test med createAuctions!</p> {/* Component instead */}
+                <CreateAuction/> 
             </React.Fragment>
         );
 
