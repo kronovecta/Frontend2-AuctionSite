@@ -7,7 +7,7 @@ import Icon from '../img/icon.svg'
 export default class NavBar extends Component {
     constructor(props) {
         super(props);
-        this.state = { showAuctions: true }
+        this.state = { showAuctions: false }
         this.handleOnClick = this.handleOnClick.bind(this);
     }
 
@@ -42,7 +42,7 @@ export default class NavBar extends Component {
         );
 
         const container = (
-            <React.Fragment>
+            <div>
                 <div style={navBarStyle}>
                     <div>
                         <img style={{width:'2rem', display: 'inline-block', verticalAlign:'middle', marginRight: '1rem'}} src={Icon} />
@@ -51,7 +51,7 @@ export default class NavBar extends Component {
                     <button className="btn btn-primary" onClick={this.handleOnClick}>{this.state.showAuctions === true ? "Skapa ny auktion" : "Visa auktioner"}</button>
                 </div>
                 {this.state.showAuctions === true ? viewAuctions : createAuctions}
-            </React.Fragment>
+            </div>
         );
 
         return (container);
