@@ -24,7 +24,5 @@ export function postData(data, type) {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         }
-    }).then(function (data) {
-        console.log('Request success: ', 'posten skapad');
     })
 }
