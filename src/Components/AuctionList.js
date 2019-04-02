@@ -19,7 +19,7 @@ export default class AuctionList extends Component {
         let auctionList;
         if(auctions != null) {
             auctionList = auctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} data={item} key={item.AuktionID} />
+                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.props.handleDelete} data={item} key={item.AuktionID} />
             })
         } else {
             // auctionList = []; // Error handling

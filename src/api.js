@@ -28,3 +28,18 @@ export function postData(data, type) {
         console.log('Request success: ', 'posten skapad');
     })
 }
+
+export function deleteData(data, type) {
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+    
+    fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    }).then(function(data) {
+        console.log('Delete successful');
+    })
+}

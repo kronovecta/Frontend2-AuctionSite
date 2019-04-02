@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-const Auction = ({ data, handleAddBid }) => {
+const Auction = ({ data, handleAddBid, handleDelete }) => {
     let auctionItemStyle = {
         border: '1px solid lightgrey',
         borderRadius: '0.5rem',
@@ -32,7 +32,7 @@ const Auction = ({ data, handleAddBid }) => {
                     <form onSubmit={handleAddBid}>
                         <div style={{display:'flex', verticalAlign: 'middle'}}>
                             <input style={{flex:'2', marginRight: '1rem'}} className="form-control" type="text" placeholder="100" name="amount" />
-                            <button className="btn btn-success">Bid</button>
+                            <button onClick={() => handleAddBid(data.AuctionID)} className="btn btn-success">Bid</button>
                         </div>
                     </form>
                 </div>
@@ -40,7 +40,7 @@ const Auction = ({ data, handleAddBid }) => {
             </div>
             <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
                 <button style={{margin:'0 0.5rem'}} className="btn btn-warning">Update</button>
-                <button className="btn btn-danger">Remove</button>
+                <button className="btn btn-danger" onClick={() => handleDelete(data.AuctionID)}>Remove</button>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuctionList from './AuctionList'
-import { createSession } from '../api';
+import { createSession, deleteData } from '../api';
 
 export default class AuctionContainer extends Component {
   constructor(props) {
@@ -13,10 +13,19 @@ export default class AuctionContainer extends Component {
       console.log(e.target.amount.value)
   }
 
+  handleDelete = (id) => {
+    let res = window.confirm("Click a button")
+    if(res == true) {
+      deleteData(id)
+    } else {
+      console.log("Cancel")
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
-        <AuctionList handleAddBid={this.handleAddBid} />
+        <AuctionList handleAddBid={this.handleAddBid} handleDelete={this.handleDelete} />
       </React.Fragment>
     )
   }
