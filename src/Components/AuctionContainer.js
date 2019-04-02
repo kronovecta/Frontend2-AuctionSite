@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import AuctionList from './AuctionList'
-import { createSession, deleteData } from '../api';
+import { createSession } from '../api';
 
 export default class AuctionContainer extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     createSession("auctionList", "auktion");
   }
 
   handleAddBid = (e) => { // Generate new Bud into the API
-      e.preventDefault();
-      // console.log(e)
-      console.log(e.target.amount.value)
+    e.preventDefault();
+    console.log(e.target.amount.value)
   }
 
   render() {

@@ -22,7 +22,7 @@ export default class AuctionList extends Component {
     handleDelete = (data) => {
         let res = window.confirm("Click a button")
 
-        if(res == true) {
+        if(res === true) {
             deleteData(data, "Auktion");
             
             let filtered = this.state.auctionList.filter(function(auction) {
@@ -44,10 +44,11 @@ export default class AuctionList extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.auctions !== prevState.auctions) {
-            let auctions = this.state.auctions;
-            let auctionList = auctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.props.handleDelete}  data={item} key={item.AuktionID} handleDelete={this.handleDelete} />
+        if (this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) {
+
+            let filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()));
+            let auctionList = filteredAuctions.map((item) => {
+                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.handleDelete} data={item} key={item.AuktionID} />
             });
 
             this.setState({
