@@ -3,8 +3,8 @@ import AuctionList from './AuctionList'
 import { createSession, deleteData } from '../api';
 
 export default class AuctionContainer extends Component {
-  constructor(props) {
-    super(props)
+
+  componentDidMount(){
     createSession("auctionList", "auktion");
   }
 

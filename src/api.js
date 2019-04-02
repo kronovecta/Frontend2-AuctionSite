@@ -10,7 +10,6 @@ function setSession(name, json) {
 }
 
 export function getSession(json) {
-    console.log(JSON.parse(sessionStorage.getItem(json)))
     return JSON.parse(sessionStorage.getItem(json));
 }
 
