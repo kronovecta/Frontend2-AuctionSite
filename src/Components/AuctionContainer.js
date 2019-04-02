@@ -16,7 +16,7 @@ export default class AuctionContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <AuctionList handleAddBid={this.handleAddBid} />
+        <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} />
       </React.Fragment>
     )
   }
