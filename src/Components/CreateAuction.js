@@ -16,8 +16,9 @@ export default class CreateAuction extends Component {
                 Beskrivning: "",
                 StartDatum: new Date(),
                 SlutDatum: new Date(),
-                Utropspris: "",
-                SkapadAv: ""
+                Utropspris: 0,
+                SkapadAv: "",
+                Gruppkod: 2050
             }
         }
     }
