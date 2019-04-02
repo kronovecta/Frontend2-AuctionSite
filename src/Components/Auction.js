@@ -32,7 +32,7 @@ const Auction = ({ data, handleAddBid, handleDelete }) => {
                     <form onSubmit={handleAddBid}>
                         <div style={{display:'flex', verticalAlign: 'middle'}}>
                             <input style={{flex:'2', marginRight: '1rem'}} className="form-control" type="text" placeholder="100" name="amount" />
-                            <button onClick={() => handleAddBid(data.AuctionID)} className="btn btn-success">Bid</button>
+                            <button className="btn btn-success">Bid</button>
                         </div>
                     </form>
                 </div>
@@ -40,7 +40,7 @@ const Auction = ({ data, handleAddBid, handleDelete }) => {
             </div>
             <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
                 <button style={{margin:'0 0.5rem'}} className="btn btn-warning">Update</button>
-                <button className="btn btn-danger" onClick={() => handleDelete(data.AuctionID)}>Remove</button>
+                <button className="btn btn-danger" onClick={() => handleDelete(data)}>Remove</button>
             </div>
         </div>
     )

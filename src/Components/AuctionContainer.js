@@ -10,13 +10,17 @@ export default class AuctionContainer extends Component {
 
   handleAddBid = (e) => { // Generate new Bud into the API
       e.preventDefault();
+      // console.log(e)
       console.log(e.target.amount.value)
   }
 
-  handleDelete = (id) => {
+  handleDelete = (data) => {
     let res = window.confirm("Click a button")
     if(res == true) {
-      deleteData(id)
+      // let auctionList = JSON.parse(sessionStorage.getItem("auctionList"));
+      // let auction = auctionList.filter(a => a.AuktionID == data.AuktionID);
+
+      deleteData(data, "Auktion")
     } else {
       console.log("Cancel")
     }
