@@ -14,22 +14,10 @@ export default class AuctionContainer extends Component {
       console.log(e.target.amount.value)
   }
 
-  handleDelete = (data) => {
-    let res = window.confirm("Click a button")
-    if(res == true) {
-      // let auctionList = JSON.parse(sessionStorage.getItem("auctionList"));
-      // let auction = auctionList.filter(a => a.AuktionID == data.AuktionID);
-
-      deleteData(data, "Auktion")
-    } else {
-      console.log("Cancel")
-    }
-  }
-
   render() {
     return (
       <React.Fragment>
-        <AuctionList handleAddBid={this.handleAddBid} handleDelete={this.handleDelete} />
+        <AuctionList handleAddBid={this.handleAddBid} />
       </React.Fragment>
     )
   }

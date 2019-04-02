@@ -29,25 +29,8 @@ export function postData(data, type) {
 }
 
 export function deleteData(data, type) {
-    console.log(data);
-    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/`;
     
-    // fetch(url, {
-    //     method: 'DELETE',
-    //     body: data.AuktionID,
-    //     headers: {
-    //         'Accept': 'application/json, text/plain, */*',
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(function(data) {
-    //     console.log(data);
-    // })
-
-    let requestOptions = {
-        method: 'DELETE'
-      };
-    
-      fetch("http://nackowskis.azurewebsites.net/api/Auktion/2050/" + data.AuktionID, requestOptions)
-        .then((response) => console.log(response))
+    fetch(url + data.AuktionID, { method: 'DELETE' })
         .then((response) => { return response.json(); });
 }
