@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
 import Auction from './Auction';
-import { getSession } from '../api';
+import { createSession, getSession } from '../api';
 
 export default class AuctionList extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            auctions: [],
+            auctionList: []
+        }
+    }
+
+    componentDidMount() {
+        createSession("auctionList", "auktion").then(
+            this.setState({
+                auctions: getSession("auctionList")
+            })
+        );
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.auctions !== prevState.auctions) {
+            let auctions = this.state.auctions;
+            let auctionList = auctions.map((item) => {
+                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.props.handleDelete}  data={item} key={item.AuktionID} />
+            });
+
+            this.setState({
+                auctionList: auctionList
+            });
+        }
     }
 
     render() {
@@ -15,19 +40,9 @@ export default class AuctionList extends Component {
             flexWrap: 'wrap'
         }
 
-        let auctions = getSession("auctionList");
-        let auctionList;
-        if(auctions != null) {
-            auctionList = auctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.props.handleDelete} data={item} key={item.AuktionID} />
-            })
-        } else {
-            // auctionList = []; // Error handling
-        }
-
         return (
             <div style={auctionItemStyle}>
-                {auctionList}
+                {this.state.auctionList}
             </div>
         )
     }
