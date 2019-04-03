@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import AuctionList from './AuctionList'
-import { createSession } from '../api';
+import { createSession, deleteData } from '../api';
 import SingleAuction from './SingleAuction';
-import { handleDelete } from './AuctionList'
 
 export default class AuctionContainer extends Component {
   constructor(props) {
@@ -16,9 +15,13 @@ export default class AuctionContainer extends Component {
   }
 
   handleDelete(data) {
-    console.log(data);
-    this.deleteData(data, "Auktion");
+    deleteData(data, "Auktion");
+    this.fetchAuctions();
     this.handleToggle(data);
+  }
+
+  async fetchAuctions() {
+    await createSession("auctionList", "auktion");
   }
 
   handleAddBid = (e) => { // Generate new Bud into the API
@@ -28,7 +31,6 @@ export default class AuctionContainer extends Component {
   }
 
   handleToggle = (data) => {
-    console.log(data)
     const newState = this.state.toggle === true ? false : true;
     this.setState({
       auctionData: data,
@@ -38,11 +40,11 @@ export default class AuctionContainer extends Component {
 
   render() {
     return (
-      <div style={{width:'80%', margin:'0 auto'}}>
+      <div style={{ width: '80%', margin: '0 auto' }}>
         {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} /> :
           <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
         }
-        </div>
+      </div>
     )
   }
 }

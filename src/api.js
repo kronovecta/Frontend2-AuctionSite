@@ -32,8 +32,7 @@ export function postData(data, type) {
 
 export async function deleteData(data, type) {
     let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/`;
-
+    
     fetch(url + data.AuktionID, { method: 'DELETE' })
-        .then((response) => { return response.json(); });
     await createSession("auctionList", "auktion");
 }

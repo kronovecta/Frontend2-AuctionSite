@@ -49,6 +49,7 @@ export default class AuctionList extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        
         if ((this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) && this.state.auctions != null) {
 
             console.log(this.state.auctions);
