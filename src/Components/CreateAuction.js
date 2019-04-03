@@ -50,15 +50,53 @@ export default class CreateAuction extends Component {
         //TODO api create auction, call method postData()
     }
 
+
     render() {
-        return (<form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Titel" id="Titel" onChange={this.handleChange} /> <br />
-            <input type="text" placeholder="Beskrivning" id="Beskrivning" onChange={this.handleChange} /><br />
-            <DatePicker selected={this.state.auction.StartDatum} onChange={(event) => {this.handleChange(event, "StartDatum")}} />
-            <DatePicker selected={this.state.auction.SlutDatum} onChange={(event) => {this.handleChange(event, "SlutDatum")}} /><br />
-            <input type="text" placeholder="Utropspris" id="Utropspris" onChange={this.handleChange} /><br />
-            <input type="text" placeholder="Skapad av" id="SkapadAv" onChange={this.handleChange} />
-            <button>Spara</button>
-        </form>);
+        return (
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <form onSubmit={this.handleSubmit} style={{width:'50%'}}>
+                    <div className="form-group">
+                   
+                        <label>Title</label>
+                        <input type="text" placeholder="Titel" id="Titel" onChange={this.handleChange} style={{width:'100%'}} />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label>Description</label>
+                       
+                        <textarea id="Beskrivning" onChange={this.handleChange} style={{width:'100%', marginB: '1rem'}} />
+                    </div>
+
+                    <div style={{'display':'flex', justifyContent:'flex-start'}} className="form-group">
+                        <div style={{marginRight:'1rem', flex:'2'}}>
+                            <label>Created by</label>
+                            <input type="text" id="SkapadAv" onChange={this.handleChange} style={{width:'100%'}} />
+                        </div>
+                        <div style={{flex:'1'}}>
+                            <label>Starting price</label>
+                            <input type="number" placeholder="0" id="Utropspris" onChange={this.handleChange} style={{width:'100%'}} />
+                        </div>
+                    </div>
+
+                    <div style={{'display':'flex', justifyContent:'space-between'}} className="form-group">
+                        <div style={{marginRight:'1rem'}}>
+                            <div style={{display:'inline-block', marginRight: '1rem'}}>
+                                <label style={{display:'block'}}>Start date:</label>
+                              
+                                <DatePicker selected={this.state.auction.StartDatum} id="StartDatum" onChange={(event) =>{this.handleChange(event, "StartDatum")}} className="datePicker"/>
+                            </div>
+                            <div style={{display:'inline-block'}}>
+                                <label style={{display:'block'}}>End date:</label>
+                              
+                                <DatePicker selected={this.state.auction.SlutDatum} id="SlutDatum" onChange={(event) => {this.handleChange(event, "SlutDatum")}}  className="datePicker"/>
+                            </div>
+                        </div>
+                    
+                        <button className="btn btn-primary">Spara</button>
+                    </div>
+
+                </form>
+            </div>);
     }
+
 }
