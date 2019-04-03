@@ -39,10 +39,10 @@ const Auction = ({ data, handleAddBid, handleDelete, handleToggle }) => {
                 </div>
             </div>
             </div>
-            <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
+            {/* <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
                 <button style={{margin:'0 0.5rem'}} className="btn btn-warning">Update</button>
                 <button className="btn btn-danger" onClick={() => handleDelete(data)}>Remove</button>
-            </div>
+            </div> */}
         </div>
     )
 }

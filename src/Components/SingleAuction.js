@@ -6,12 +6,6 @@ import Moment from 'react-moment';
 export default class SingleAuction extends Component {
     constructor(props) {
         super(props)
-    
-        this.state = {  }
-    }
-
-    handleDelete() {
-        deleteData(this.props.data, "Auktion");
     }
     
     render() {
@@ -54,6 +48,10 @@ export default class SingleAuction extends Component {
                         <div style={{display:'block'}}>
                             <p style={{display:'inline-block'}}>End date: </p><Moment format="LLL" date={this.props.data.SluttDatum} />
                         </div>
+
+                        <div style={{display:'block'}}>
+                            <progress value="50" max="100" />
+                        </div>
                         
                         <div style={{marginTop: '2rem'}}>
                         <div style={{display:'flex', flexDirection: 'row'}}>
@@ -77,7 +75,7 @@ export default class SingleAuction extends Component {
                     </div>
                     <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
                         <button style={{margin:'0 0.5rem'}} className="btn btn-warning">Update</button>
-                        <button className="btn btn-danger" onClick={this.handleDelete}>Remove</button>
+                        <button className="btn btn-danger" onClick={() => this.props.handleDelete(this.props.data)}>Remove</button>
                     </div>
                 </div>
 

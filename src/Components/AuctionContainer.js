@@ -7,11 +7,18 @@ import { handleDelete } from './AuctionList'
 export default class AuctionContainer extends Component {
   constructor(props) {
     super(props)
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       toggle: false,
       auctionData: null
     }
+  }
+
+  handleDelete(data) {
+    console.log(data);
+    this.deleteData(data, "Auktion");
+    this.handleToggle(data);
   }
 
   handleAddBid = (e) => { // Generate new Bud into the API
@@ -32,7 +39,7 @@ export default class AuctionContainer extends Component {
   render() {
     return (
       <div style={{width:'80%', margin:'0 auto'}}>
-        {this.state.toggle === true ? <SingleAuction data={this.state.auctionData} /> :
+        {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} /> :
           <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
         }
         </div>
