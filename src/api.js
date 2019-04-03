@@ -1,5 +1,6 @@
 export async function createSession(name, type, id) {
-    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/${id}`;
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+    typeof id !== 'undefined' ? url += `/${id}` : url += ''; //kanske ger error :D
     let promise = await fetch(url);
     let data = await promise.json();
     setSession(name, data);
@@ -28,9 +29,10 @@ export function postData(data, type) {
     })
 }
 
-export function deleteData(data, type) {
+export async function deleteData(data, type) {
     let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/`;
     
     fetch(url + data.AuktionID, { method: 'DELETE' })
         .then((response) => { return response.json(); });
+    await createSession("auctionList", "auktion");
 }
