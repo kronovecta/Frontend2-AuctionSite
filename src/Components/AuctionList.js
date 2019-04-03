@@ -48,7 +48,7 @@ export default class AuctionList extends Component {
 
             let filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()));
             let auctionList = filteredAuctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.handleDelete} data={item} key={item.AuktionID} />
+                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.handleDelete} data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
             });
 
             this.setState({

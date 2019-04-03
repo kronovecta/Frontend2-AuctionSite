@@ -13,10 +13,14 @@ export default class AuctionContainer extends Component {
     console.log(e.target.amount.value)
   }
 
+  handleToggle = (data) => {
+    console.log(data)
+  }
+
   render() {
     return (
       <React.Fragment>
-        <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} />
+        <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
       </React.Fragment>
     )
   }
