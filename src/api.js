@@ -30,9 +30,24 @@ export function postData(data, type) {
     })
 }
 
+export function updateData(data, type) {
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    }).then(function (data) {
+        console.log('Request success: ', 'posten skapad');
+    })
+}
+
 export async function deleteData(data, type) {
     let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/`;
-    
+
     fetch(url + data.AuktionID, { method: 'DELETE' })
     await createSession("auctionList", "auktion");
 }
