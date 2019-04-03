@@ -21,25 +21,7 @@ export default class AuctionList extends Component {
     }
 
     componentDidMount() {
-        // let url = `http://nackowskis.azurewebsites.net/api/auktion/2050`;
-
-        // let json = "";
-        // await fetch(url).then(function (response) {
-        //     return response.json();
-        // }).then(function (myJson) {
-        //     json = myJson;
-        // })
-        // let json = getData("auktion");
-        // console.log(json);
-
         this.createAuctions();
-        // console.log(object);
-
-        // createSession("auctionList", "auktion").then(
-        //     this.setState({
-        //         auctions: getSession("auctionList")
-        //     })
-        // );
     }
 
     handleDelete = (data) => {
