@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuctionList from './AuctionList'
 import { createSession } from '../api';
 import SingleAuction from './SingleAuction';
+import { handleDelete } from './AuctionList'
 
 export default class AuctionContainer extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class AuctionContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.toggle === true ? <SingleAuction data = {this.state.auktionData} /> :
+        {this.state.toggle === true ? <SingleAuction data={this.state.auctionData} /> :
           <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
         }
       </React.Fragment>

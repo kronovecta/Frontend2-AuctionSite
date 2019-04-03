@@ -9,7 +9,7 @@ export default class BidList extends Component {
     }
   }
   componentDidMount() {
-    createSession("bidList", "bud", this.props.selected.id).then(
+    createSession("bidList", "bud", this.props.selected.AuktionID).then(
       this.setState({
         allBids: getSession("bidList")
       })
