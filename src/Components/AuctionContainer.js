@@ -35,11 +35,11 @@ export default class AuctionContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div style={{width:'80%', margin:'0 auto'}}>
         {this.state.toggle === true ? <SingleAuction data={this.state.auctionData} /> :
           <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
         }
-      </React.Fragment>
+        </div>
     )
   }
 }

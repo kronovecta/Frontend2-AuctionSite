@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { createSession, getSession } from '../api';
+import './BidList.css'
 
 export default class BidList extends Component {
   constructor(props) {
@@ -9,36 +10,39 @@ export default class BidList extends Component {
     }
   }
   componentDidMount() {
-    createSession("bidList", "bud", this.props.selected.AuktionID).then(
+    createSession("bidList", "bud", 1/*this.props.selected.AuktionID*/)
+    .then((response) => console.log(response))
+    .then(
       this.setState({
         allBids: getSession("bidList")
       })
-    );
+    )
 
   }
   render() {
 
     let allTheBids = this.state.allBids.map((item) => {
-      return <div>
-        <tr>
-          <td>{item.Summa}</td> <td>{item.Budgivare}</td>
-        </tr>
-      </div>
+      return(
+        <tr key={item.BudID}>
+            <td>{item.Budgivare}</td>
+          <td><span style={{fontWeight: '600'}}>{item.Summa}</span> SEK</td>
+        </tr>)
     });
     return (
-      <div>
-        <h3>BidList</h3>
+      <div style={{marginLeft:'3rem'}}>
+        <div className="bidList">
         <table>
           <thead>
             <tr>
-              <th>Bud</th>
               <th>Budgivare</th>
+              <th>Bud</th>
             </tr>
           </thead>
           <tbody>
             {allTheBids}
           </tbody>
         </table>
+        </div>
       </div>
     )
   }
