@@ -1,5 +1,5 @@
-export async function createSession(name, type) {
-    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
+export async function createSession(name, type, id) {
+    let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/${id}`;
     let promise = await fetch(url);
     let data = await promise.json();
     setSession(name, data);
