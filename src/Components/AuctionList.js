@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Auction from './Auction';
-import { createSession, getSession, deleteData } from '../api';
+import { createSession, getSession, deleteData, getData } from '../api';
 
 export default class AuctionList extends Component {
     constructor(props) {
@@ -9,24 +9,47 @@ export default class AuctionList extends Component {
             auctions: [],
             auctionList: []
         }
+        this.createAuctions = this.createAuctions.bind(this);
+    }
+
+    async createAuctions() {
+        await createSession("auctionList", "auktion");
+        let auctions = await getSession("auctionList");
+        await this.setState({
+            auctions: auctions
+        })
     }
 
     componentDidMount() {
-        createSession("auctionList", "auktion").then(
-            this.setState({
-                auctions: getSession("auctionList")
-            })
-        );
+        // let url = `http://nackowskis.azurewebsites.net/api/auktion/2050`;
+
+        // let json = "";
+        // await fetch(url).then(function (response) {
+        //     return response.json();
+        // }).then(function (myJson) {
+        //     json = myJson;
+        // })
+        // let json = getData("auktion");
+        // console.log(json);
+
+        this.createAuctions();
+        // console.log(object);
+
+        // createSession("auctionList", "auktion").then(
+        //     this.setState({
+        //         auctions: getSession("auctionList")
+        //     })
+        // );
     }
 
     handleDelete = (data) => {
         let res = window.confirm("Click a button")
 
-        if(res === true) {
+        if (res === true) {
             deleteData(data, "Auktion");
-            
-            let filtered = this.state.auctionList.filter(function(auction) {
-                if(auction.props.data.AuktionID !== data.AuktionID) {
+
+            let filtered = this.state.auctionList.filter(function (auction) {
+                if (auction.props.data.AuktionID !== data.AuktionID) {
                     return auction
                 }
             })
@@ -35,20 +58,21 @@ export default class AuctionList extends Component {
                 return auction.props.data
             })
 
-            this.setState({auctionList: filtered})
+            this.setState({ auctionList: filtered })
             sessionStorage.setItem("auctionList", JSON.stringify(newAuctionList));
 
         } else {
-          console.log("Cancel")
+            console.log("Cancel")
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) {
+        if ((this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) && this.state.auctions != null) {
 
+            console.log(this.state.auctions);
             let filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()));
-            filteredAuctions.sort((a,b)=>{
-               return a.Titel.localeCompare(b.Titel);
+            filteredAuctions.sort((a, b) => {
+                return a.Titel.localeCompare(b.Titel);
             })
             let auctionList = filteredAuctions.map((item) => {
                 return <Auction handleAddBid={this.props.handleAddBid} /*handleDelete={this.handleDelete}*/ data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
@@ -58,7 +82,9 @@ export default class AuctionList extends Component {
                 auctionList: auctionList
             });
         }
-    } 
+        // console.log(this.state.auctions);
+
+    }
 
     render() {
         let auctionItemStyle = {
@@ -67,6 +93,8 @@ export default class AuctionList extends Component {
             justifyContent: 'flex-start',
             flexWrap: 'wrap'
         }
+        // console.log(this.state.auctions);
+
 
         return (
             <div style={auctionItemStyle}>

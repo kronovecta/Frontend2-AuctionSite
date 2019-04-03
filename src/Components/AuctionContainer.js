@@ -14,10 +14,6 @@ export default class AuctionContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    createSession("auctionList", "auktion");
-  }
-
   handleAddBid = (e) => { // Generate new Bud into the API
     e.preventDefault();
     console.log(e.target.amount.value)
