@@ -20,9 +20,9 @@ export default class BidList extends Component {
 
   }
   render() {
-    let filteredBids = this.state.allBids.sort((a,b)=>{
-      return parseInt(a.Summa) - parseInt((b.Summa)).reverse();
-    });
+    this.state.allBids.sort((a,b)=>{
+      return parseInt(a.Summa) - parseInt((b.Summa));
+    }).reverse();
 
     let allTheBids = this.state.allBids.map((item) => {
       return(
