@@ -19,7 +19,9 @@ export default class SingleAuction extends Component {
             border: '1px solid lightgrey',
             borderRadius: '0.5rem',
             margin: '1rem',
-            minWidth: '300px'
+            minWidth: '300px',
+            flex:'2',
+            marginRight:'2rem'
         }
 
         let auctionItemStyleHover = {
@@ -31,8 +33,7 @@ export default class SingleAuction extends Component {
         }
 
         return (
-            <React.Fragment>
-                <div style={auctionItemStyle} className="auctionItemStyle">
+            <div style={{display:'flex', justifyContent:'space-between', flexDirection:'row', flexWrap:'wrap'}}>
                     <div style={innerAuctionItemStyle}>
                         <div style={{display:'flex', justifyContent: 'space-between', marginBottom: '1rem'}}>
                             <h3 style={{marginBottom: '1rem', display:'inline-block'}}>{this.props.data.Titel}</h3>
@@ -51,14 +52,16 @@ export default class SingleAuction extends Component {
                             </form>
                         </div>
                     </div>
-                    </div>
-                    <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem'}}>
+                    <div style={{background:'rgba(255,0,0,0.1', padding: '0.5rem', display:'flex', justifyContent: 'space-between', borderRadius: '0.3rem', alignItems:'bottom'}}>
                         <button style={{margin:'0 0.5rem'}} className="btn btn-warning">Update</button>
                         <button className="btn btn-danger" onClick={this.handleDelete}>Remove</button>
                     </div>
                 </div>
-                <BidList selected={this.props.data}/>
-            </React.Fragment>
+
+                <div>
+                    <BidList selected={this.props.data}/>
+                </div>
+            </div>
         )
     }
 }

@@ -64,7 +64,7 @@ export default class AuctionList extends Component {
         let auctionItemStyle = {
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             flexWrap: 'wrap'
         }
 

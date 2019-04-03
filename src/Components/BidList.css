@@ -1,0 +1,21 @@
+.bidList {
+    max-height:70vh;
+    overflow-y:scroll;
+    padding-right:2rem;
+}
+
+tr > th:first-child, tr > td:first-child {
+    padding-right:2rem;
+}
+
+thead > tr:first-child {
+    border-bottom:none;
+}
+
+tr {
+    border-bottom:1px solid rgba(0,0,0,0.1);
+}
+
+td {
+    padding:0.5rem 0;
+}
