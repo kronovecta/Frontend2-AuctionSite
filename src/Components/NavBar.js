@@ -40,7 +40,7 @@ export default class NavBar extends Component {
 
         const searchBar = (
             <React.Fragment>
-                <input type="text" placeholder="Sök auktion" onChange={this.handleChange}></input>
+                <input style={{padding:'0.5rem', border:'1px solid lightgrey', borderRadius:'0.5rem', verticalAlign: 'middle', boxSizing:'border-box'}} type="text" placeholder="Sök auktion" onChange={this.handleChange}></input>
             </React.Fragment>
         );
 
