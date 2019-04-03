@@ -24,30 +24,6 @@ export default class AuctionList extends Component {
         this.fetchAuctions();
     }
 
-    handleDelete = (data) => {
-        let res = window.confirm("Click a button")
-
-        if (res === true) {
-            deleteData(data, "Auktion");
-
-            let filtered = this.state.auctionList.filter(function (auction) {
-                if (auction.props.data.AuktionID !== data.AuktionID) {
-                    return auction
-                }
-            })
-
-            let newAuctionList = filtered.map(auction => {
-                return auction.props.data
-            })
-
-            this.setState({ auctionList: filtered })
-            sessionStorage.setItem("auctionList", JSON.stringify(newAuctionList));
-
-        } else {
-            console.log("Cancel")
-        }
-    }
-
     componentDidUpdate(prevProps, prevState) {
         
         if ((this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) && this.state.auctions != null) {
