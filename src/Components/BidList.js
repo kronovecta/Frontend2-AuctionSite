@@ -32,7 +32,6 @@ export default class BidList extends Component {
         </tr>)
     });
     return (
-      <div style={{marginLeft:'3rem'}}>
         <div className="bidList">
         <table>
           <thead>
@@ -46,7 +45,6 @@ export default class BidList extends Component {
           </tbody>
         </table>
         </div>
-      </div>
     )
   }
 }
