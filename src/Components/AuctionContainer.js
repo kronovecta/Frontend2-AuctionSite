@@ -15,14 +15,8 @@ export default class AuctionContainer extends Component {
   }
 
   handleDelete(data) {
-<<<<<<< HEAD
-    console.log(data);
-    deleteData(data, "Auktion");
-    sessionStorage.setItem = null;
-=======
     deleteData(data, "Auktion");
     this.fetchAuctions();
->>>>>>> 999149c4381cd14cad676ff456795e083952e338
     this.handleToggle(data);
   }
 
