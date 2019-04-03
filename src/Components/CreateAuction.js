@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { postData, updateData } from '../api';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Moment from 'react-moment';
 
 export default class CreateAuction extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class CreateAuction extends Component {
                 Beskrivning: "",
                 StartDatum: new Date(),
                 SlutDatum: new Date(),
-                Utropspris: null,
+                Utropspris: "",
                 SkapadAv: "",
                 Gruppkod: 2050
             }
@@ -63,6 +64,7 @@ export default class CreateAuction extends Component {
 
     render() {
         return (
+            
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <form onSubmit={this.handleSubmit} style={{ width: '50%' }}>
                     <div className="form-group">
@@ -90,11 +92,11 @@ export default class CreateAuction extends Component {
                         <div style={{ marginRight: '1rem' }}>
                             <div style={{ display: 'inline-block', marginRight: '1rem' }}>
                                 <label style={{ display: 'block' }}>Start date:</label>
-                                <DatePicker selected={this.state.auction.StartDatum} id="StartDatum" onChange={(event) => { this.handleChange(event, "StartDatum") }} className="datePicker" value={this.state.auction.StartDatum} />
+                                <DatePicker selected={this.state.auction.StartDatum} id="StartDatum" onChange={(event) => { this.handleChange(event, "StartDatum") }} className="datePicker" />
                             </div>
                             <div style={{ display: 'inline-block' }}>
                                 <label style={{ display: 'block' }}>End date:</label>
-                                <DatePicker selected={this.state.auction.SlutDatum} id="SlutDatum" onChange={(event) => { this.handleChange(event, "SlutDatum") }} className="datePicker" value={this.state.auction.SlutDatum} />
+                                <DatePicker selected={this.state.auction.SlutDatum} id="SlutDatum" onChange={(event) => { this.handleChange(event, "SlutDatum") }} className="datePicker" />
                             </div>
                         </div>
 
