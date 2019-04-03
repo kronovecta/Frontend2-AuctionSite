@@ -51,7 +51,7 @@ export default class AuctionList extends Component {
                return a.Titel.localeCompare(b.Titel);
             })
             let auctionList = filteredAuctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} handleDelete={this.handleDelete} data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
+                return <Auction handleAddBid={this.props.handleAddBid} /*handleDelete={this.handleDelete}*/ data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
             });
 
             this.setState({
