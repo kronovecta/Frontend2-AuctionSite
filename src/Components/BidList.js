@@ -8,10 +8,10 @@ export default class BidList extends Component {
     this.state = {
       allBids: []
     }
-    this.createBids = this.createBids.bind(this);
+    this.fetchBids = this.fetchBids.bind(this);
   }
 
-  async createBids() {
+  async fetchBids() {
     await createSession("bidList", "bud", 1/*this.props.selected.AuktionID*/);
     let bids = await getSession("bidList")
     await this.setState({
@@ -20,7 +20,7 @@ export default class BidList extends Component {
   }
 
   componentDidMount() {
-    this.createBids();
+    this.fetchBids();
   }
 
   render() {

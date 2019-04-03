@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Auction from './Auction';
-import { createSession, getSession, deleteData, getData } from '../api';
+import { createSession, getSession, deleteData } from '../api';
 
 export default class AuctionList extends Component {
     constructor(props) {
@@ -9,10 +9,10 @@ export default class AuctionList extends Component {
             auctions: [],
             auctionList: []
         }
-        this.createAuctions = this.createAuctions.bind(this);
+        this.fetchAuctions = this.fetchAuctions.bind(this);
     }
 
-    async createAuctions() {
+    async fetchAuctions() {
         await createSession("auctionList", "auktion");
         let auctions = await getSession("auctionList");
         await this.setState({
@@ -21,7 +21,7 @@ export default class AuctionList extends Component {
     }
 
     componentDidMount() {
-        this.createAuctions();
+        this.fetchAuctions();
     }
 
     handleDelete = (data) => {
