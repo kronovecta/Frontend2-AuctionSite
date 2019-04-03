@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuctionList from './AuctionList'
-import { createSession } from '../api';
+import { createSession, deleteData } from '../api';
 import SingleAuction from './SingleAuction';
 import { handleDelete } from './AuctionList'
 
@@ -17,7 +17,8 @@ export default class AuctionContainer extends Component {
 
   handleDelete(data) {
     console.log(data);
-    this.deleteData(data, "Auktion");
+    deleteData(data, "Auktion");
+    sessionStorage.setItem = null;
     this.handleToggle(data);
   }
 
