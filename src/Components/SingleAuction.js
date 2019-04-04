@@ -12,11 +12,17 @@ export default class SingleAuction extends Component {
             displayAuction: true
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     handleClick() {
         const newState = this.state.displayAuction === true ? false : true;
         this.setState({ displayAuction: newState });
+    }
+
+    handleCancel = (e) => {
+        e.preventDefault();
+        this.setState({displayAuction: true})
     }
 
     render() {
@@ -50,18 +56,12 @@ export default class SingleAuction extends Component {
                             <p style={{ textAlign: 'right', display: 'inline-block' }}>Utgångspris: <br /><span style={{ fontWeight: '600' }}>{this.props.data.Utropspris} SEK</span></p>
                         </div>
                         <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
-                        {/* <p style={{margin:'0'}}>Start: {this.props.data.StartDatum.substring(0,10)}</p> */}
-                        {/* <p style={{margin:'0'}}>Slut: {this.props.data.SlutDatum.substring(0,10)}</p> */}
 
                         <div style={{ display: 'block' }}>
                             <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
                         </div>
                         <div style={{ display: 'block' }}>
                             <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SluttDatum} />
-                        </div>
-
-                        <div style={{ display: 'block' }}>
-                            <progress value="50" max="100" />
                         </div>
 
                         <div style={{ marginTop: '2rem' }}>
@@ -96,7 +96,7 @@ export default class SingleAuction extends Component {
             </div>)
 
         return (
-            this.state.displayAuction === true ? Content : <CreateAuction data={this.props.data} />
+            this.state.displayAuction === true ? Content : <CreateAuction handleCancel={this.handleCancel} data={this.props.data} />
         )
     }
 }

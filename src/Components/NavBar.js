@@ -14,6 +14,7 @@ export default class NavBar extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     handleClick() {
@@ -23,6 +24,11 @@ export default class NavBar extends Component {
 
     handleChange(e) {
         this.setState({ searchString: e.target.value });
+    }
+
+    handleCancel(e) {
+        e.preventDefault();
+        this.setState({showAuctions: true})
     }
 
     render() {
@@ -56,7 +62,7 @@ export default class NavBar extends Component {
                     {this.state.showAuctions === true ? searchBar : title}
                     <button className="btn btn-primary" onClick={this.handleClick}>{this.state.showAuctions === true ? "Skapa ny auktion" : "Visa auktioner"}</button>
                 </div>
-                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} /> : <CreateAuction />}
+                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} /> : <CreateAuction handleCancel={this.handleCancel} />}
             </div>
         );
 
