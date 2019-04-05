@@ -24,12 +24,6 @@ export default class AuctionContainer extends Component {
     await createSession("auctionList", "auktion");
   }
 
-  handleAddBid = (e) => { // Generate new Bud into the API
-    e.preventDefault();
-    console.log(e.target.amount.value)
-
-  }
-
   handleToggle = (data) => {
     const newState = this.state.toggle === true ? false : true;
     this.setState({
@@ -41,7 +35,7 @@ export default class AuctionContainer extends Component {
   render() {
     return (
       <div style={{ width: '80%', margin: '0 auto' }}>
-        {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} /> :
+        {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} handleAddBid={this.handleAddBid} /> :
           <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
         }
       </div>

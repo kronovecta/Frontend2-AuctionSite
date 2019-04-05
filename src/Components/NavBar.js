@@ -14,6 +14,7 @@ export default class NavBar extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     handleClick() {
@@ -23,6 +24,11 @@ export default class NavBar extends Component {
 
     handleChange(e) {
         this.setState({ searchString: e.target.value });
+    }
+
+    handleCancel(e) {
+        e.preventDefault();
+        this.setState({showAuctions: true})
     }
 
     render() {
@@ -40,11 +46,11 @@ export default class NavBar extends Component {
 
         const searchBar = (
             <React.Fragment>
-                <input style={{padding:'0.5rem', border:'1px solid lightgrey', borderRadius:'0.5rem', verticalAlign: 'middle', boxSizing:'border-box'}} type="text" placeholder="Sök auktion" onChange={this.handleChange}></input>
+                <input style={{padding:'0.5rem', border:'1px solid lightgrey', borderRadius:'0.5rem', verticalAlign: 'middle', boxSizing:'border-box'}} type="text" placeholder="Search auction" onChange={this.handleChange}></input>
             </React.Fragment>
         );
 
-        const title = (<h1>Skapa auktion</h1>);
+        const title = (<h1 style={{fontSize:'2rem'}}>Skapa auktion</h1>);
 
         const container = (
             <div>
@@ -56,7 +62,7 @@ export default class NavBar extends Component {
                     {this.state.showAuctions === true ? searchBar : title}
                     <button className="btn btn-primary" onClick={this.handleClick}>{this.state.showAuctions === true ? "Skapa ny auktion" : "Visa auktioner"}</button>
                 </div>
-                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} /> : <CreateAuction />}
+                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} /> : <CreateAuction handleCancel={this.handleCancel} />}
             </div>
         );
 

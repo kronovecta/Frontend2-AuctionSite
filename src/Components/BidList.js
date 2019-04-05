@@ -32,7 +32,7 @@ export default class BidList extends Component {
     });
 
     return (
-      <div className="bidList">
+      <div className="bidList" style={{marginTop:'1.5rem'}}>
         <table>
           <thead>
             <tr>
