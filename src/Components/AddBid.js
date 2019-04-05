@@ -6,50 +6,6 @@ export default class AddBid extends Component {
       super(props)
     }
 
-    handleAddBid = (e) => {
-        e.preventDefault();
-        let price = false;
-        let name = false;
-
-        if(e.target.amount.value >= this.props.auctionData.Utropspris) {
-            price = true;
-        }
-        
-        if(e.target.name.value != "") {
-            name = true;
-        }
-
-        console.log(price)
-        console.log(name)
-
-        if(price === true && name === true) {
-            // this.postBid(this.props.auctionData, e.target.name.value, e.target.amount.value)
-        } else {
-            this.postError(price, name)
-        }
-    }
-
-    // async postBid(data, name, amount) {
-    //     let object = {Budgivare: name, Summa: amount, AuktionID: data.AuktionID}
-    //     await postData(object, "bud");
-
-    //     this.props.update();
-    //     // console.log(object)
-    // }
-
-    postError(price, name) {
-        let error = 'Error posting bid';
-        if(price === false && name === false) {
-            error = error + ': Invalid name and amount'
-        } else if(name === false) {
-            error = error + ': Invalid name'
-        } else if(price === false) {
-            error = error + ': Invalid amount'
-        }
-
-        this.refs.validation.innerHTML = error
-    }
-
     render() {
         let formGroupStyle = {
             width:'100%',
