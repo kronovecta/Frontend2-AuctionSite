@@ -18,6 +18,7 @@ export default class SingleAuction extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.fetchBids = this.fetchBids.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.handleReturn = this.handleReturn.bind(this);
     }
 
     async fetchBids() {
@@ -48,6 +49,10 @@ export default class SingleAuction extends Component {
     handleCancel = (e) => {
         e.preventDefault();
         this.setState({ displayAuction: true })
+    }
+    
+    handleReturn = () => {
+
     }
 
     handleAddBid = (e) => {
@@ -101,36 +106,40 @@ export default class SingleAuction extends Component {
         )
 
         const Content = (
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
-                <div style={{ flex: '2', marginRight: '5vw' }}>
-                    <div style={innerAuctionItemStyle}>
-                        <div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                <h3 style={{ marginBottom: '1rem', display: 'inline-block' }}>{this.props.data.Titel}</h3>
-                                <p style={{ textAlign: 'right', display: 'inline-block' }}>Utgångspris: <br /><span style={{ fontWeight: '600' }}>{this.props.data.Utropspris} SEK</span></p>
-                            </div>
-                            <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
+            <React.Fragment>
+                <div style={{ padding: '0.5rem', display: 'flex', justifyContent: 'flex-end', borderRadius: '0.3rem' }}>
+                    <form><button className="btn btn-primary" onClick={this.handleReturn}>Return</button></form>
+                    <button style={{ margin: '0 0.5rem' }} className="btn btn-warning" onClick={this.handleClick}>Update</button>
+                    <button className="btn btn-danger" onClick={() => this.props.handleDelete(this.props.data)}>Remove</button>
+                </div>
+            
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
+                    <div style={{ flex: '2', marginRight: '5vw' }}>
+                        <div style={innerAuctionItemStyle}>
+                            <div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                                    <h3 style={{ marginBottom: '1rem', display: 'inline-block' }}>{this.props.data.Titel}</h3>
+                                    <p style={{ textAlign: 'right', display: 'inline-block' }}>Utgångspris: <br /><span style={{ fontWeight: '600' }}>{this.props.data.Utropspris} SEK</span></p>
+                                </div>
+                                <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
 
-                            <div style={{ display: 'block' }}>
-                                
-                                <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
+                                <div style={{ display: 'block' }}>
+                                    
+                                    <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
+                                </div>
+                                <div style={{ display: 'block' }}>
+                                    <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SlutDatum} />
+                                </div>
                             </div>
-                            <div style={{ display: 'block' }}>
-                                <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SlutDatum} />
-                            </div>
-                        </div>
-                        <div style={{ background: 'rgba(255,0,0,0.1', padding: '0.5rem', display: 'flex', justifyContent: 'space-between', borderRadius: '0.3rem' }}>
-                            <button style={{ margin: '0 0.5rem' }} className="btn btn-warning" onClick={this.handleClick}>Update</button>
-                            <button className="btn btn-danger" onClick={() => this.props.handleDelete(this.props.data)}>Remove</button>
                         </div>
                     </div>
-                </div>
 
-                <div style={{ flex: '1', minWidth: '200px', maxWidth:'300px' }}>
-                    {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
-                    <BidList selected={this.props.data} bids={this.state.allBids} />
+                    <div style={{ flex: '1', minWidth: '200px', maxWidth:'300px' }}>
+                        {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
+                        <BidList selected={this.props.data} bids={this.state.allBids} />
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
         )
 
         return (
