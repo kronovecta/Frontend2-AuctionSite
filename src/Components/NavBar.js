@@ -9,7 +9,8 @@ export default class NavBar extends Component {
         super(props);
         this.state = {
             showAuctions: true,
-            searchString: ""
+            searchString: "",
+            viewExpired: false
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -23,7 +24,7 @@ export default class NavBar extends Component {
     }
 
     handleChange(e) {
-        this.setState({ searchString: e.target.value });
+        this.setState({ searchString: e.target.value, viewExpired: true });
     }
 
     handleCancel(e) {
@@ -62,7 +63,7 @@ export default class NavBar extends Component {
                     {this.state.showAuctions === true ? searchBar : title}
                     <button className="btn btn-primary" onClick={this.handleClick}>{this.state.showAuctions === true ? "Skapa ny auktion" : "Visa auktioner"}</button>
                 </div>
-                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} /> : <CreateAuction handleCancel={this.handleCancel} />}
+                {this.state.showAuctions === true ? <AuctionContainer searchString={this.state.searchString} viewExpired={this.state.viewExpired} /> : <CreateAuction handleCancel={this.handleCancel} />}
             </div>
         );
 

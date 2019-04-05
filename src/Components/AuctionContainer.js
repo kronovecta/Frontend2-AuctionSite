@@ -35,8 +35,8 @@ export default class AuctionContainer extends Component {
   render() {
     return (
       <div style={{ width: '80%', margin: '0 auto' }}>
-        {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} /> :
-          <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} />
+        {this.state.toggle === true ? <SingleAuction handleDelete={this.handleDelete} data={this.state.auctionData} handleAddBid={this.handleAddBid} /> :
+          <AuctionList handleAddBid={this.handleAddBid} searchString={this.props.searchString} handleToggle={this.handleToggle} viewExpired={this.props.viewExpired} />
         }
       </div>
     )
