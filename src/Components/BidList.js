@@ -32,6 +32,10 @@ export default class BidList extends Component {
             <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
           </tr>)
       });
+
+      if (new Date(this.props.selected.SlutDatum).getTime() < new Date().getTime()) {
+        allTheBids = allTheBids[0];
+      }
     }
 
     return (
