@@ -6,7 +6,7 @@ export default class BidList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allBids: []
+      // allBids: []
     }
   }
 
@@ -19,20 +19,25 @@ export default class BidList extends Component {
   }
 
   render() {
-    this.state.allBids.sort((a, b) => {
-      return parseInt(a.Summa) - parseInt((b.Summa));
-    }).reverse();
+    let allTheBids;
+    // console.log("utanför if "+this.state.allBids);
+    if (typeof this.state.allBids !== "undefined") {
+      console.log(this.state.allBids);
+      this.state.allBids.sort((a, b) => {
+        return parseInt(a.Summa) - parseInt((b.Summa));
+      }).reverse()
 
-    let allTheBids = this.state.allBids.map((item) => {
-      return (
-        <tr key={item.BudID}>
-          <td>{item.Budgivare}</td>
-          <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
-        </tr>)
-    });
+      allTheBids = this.state.allBids.map((item) => {
+        return (
+          <tr key={item.BudID}>
+            <td>{item.Budgivare}</td>
+            <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
+          </tr>)
+      });
+    }
 
     return (
-      <div className="bidList" style={{marginTop:'1.5rem'}}>
+      <div className="bidList" style={{ marginTop: '1.5rem' }}>
         <table>
           <thead>
             <tr>
