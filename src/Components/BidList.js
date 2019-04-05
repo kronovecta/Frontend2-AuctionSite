@@ -25,7 +25,8 @@ export default class BidList extends Component {
 
     if(isToBeGone === true){
       console.log("Nu tas det bort");
-      //deleteData(item,"bud");
+      deleteData(item,"bud");
+      this.props.update();
     }
   
   }
