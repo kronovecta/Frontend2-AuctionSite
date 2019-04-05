@@ -102,8 +102,6 @@ export default class CreateAuction extends Component {
         return validate;
     }
 
-    
-
     render() {
         const validate = (<div style={{width:'50%', textAlign:'center'}} className={this.state.validator.className}><span>{this.state.validator.message}</span></div>)
 

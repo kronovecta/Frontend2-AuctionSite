@@ -23,8 +23,16 @@ export default class SingleAuction extends Component {
     async fetchBids() {
         await createSession("bidList", "bud", this.props.data.AuktionID);
         let bids = await getSession("bidList")
+
+        let sorted = bids.sort((a, b) => {
+            return parseInt(a.Summa) - parseInt((b.Summa));
+        }).reverse()
+
+        console.log(bids)
+        console.log(sorted)
+
         await this.setState({
-            allBids: bids
+            allBids: sorted
         })
     }
 
@@ -55,11 +63,8 @@ export default class SingleAuction extends Component {
             name = true;
         }
 
-        console.log(price)
-        console.log(name)
-
         if (price === true && name === true) {
-            console.log("funkade!");
+
             this.postBid(this.props.data, e.target.name.value, e.target.amount.value)
         } else {
             // this.postError(price, name)
@@ -68,23 +73,21 @@ export default class SingleAuction extends Component {
 
     postBid(data, name, amount) {
         let object = { Budgivare: name, Summa: amount, AuktionID: data.AuktionID }
-        this.setState({
-            allBids: [...this.state.allBids, object]
-        }, () => { console.log(this.state.allBids) })
-        postData(object, "bud");
-        // console.log(object)
+        console.log(object.Summa)
+
+
+        if(object.Summa > this.state.allBids[0].Summa) {
+            this.setState({
+                allBids: [...this.state.allBids, object]
+            }, () => { console.log(this.state.allBids) })
+            postData(object, "bud");
+        } else {
+            console.log("Bid too small");
+        }
+        
     }
 
     render() {
-        console.log(this.props.data.SlutDatum)
-
-        let auctionItemStyle = {
-            border: '1px solid lightgrey',
-            borderRadius: '0.5rem',
-            margin: '1rem',
-            minWidth: '300px',
-        }
-
         let innerAuctionItemStyle = {
             flex: '2',
             marginRight: '2rem',
@@ -92,10 +95,7 @@ export default class SingleAuction extends Component {
             flexDirection: 'column',
             justifyContent: 'space-between'
         }
-
-        let num = typeof(1)
-        console.log(num)
-
+        
         const addBid = (
             <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
         )
@@ -126,7 +126,7 @@ export default class SingleAuction extends Component {
                     </div>
                 </div>
 
-                <div style={{ flex: '1', minWidth: '370px' }}>
+                <div style={{ flex: '1', minWidth: '200px', maxWidth:'300px' }}>
                     {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
                     <BidList selected={this.props.data} bids={this.state.allBids} />
                 </div>
