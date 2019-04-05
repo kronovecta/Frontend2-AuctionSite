@@ -82,7 +82,7 @@ export default class AddBid extends Component {
                         </div>
                         <div style={formGroupStyle}>
                             <span style={{color:'red'}} ref="validation"></span>
-                        </div>
+                        </div>                      
                     </div>
                 </form>
             </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createSession, getSession } from '../api';
+import { createSession, getSession,deleteData } from '../api';
 import './BidList.css'
 
 export default class BidList extends Component {
@@ -8,6 +8,7 @@ export default class BidList extends Component {
     this.state = {
       // allBids: []
     }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -16,6 +17,17 @@ export default class BidList extends Component {
         allBids: this.props.bids
       })
     }
+  }
+
+  handleClick=(event, item)=>{
+    console.log(item.BudID, item.Summa, item.Budgivare, item.AuktionID);
+    let isToBeGone = window.confirm("Säker på att du vill ta bort?");
+
+    if(isToBeGone === true){
+      console.log("Nu tas det bort");
+      //deleteData(item,"bud");
+    }
+  
   }
 
   render() {
@@ -30,6 +42,7 @@ export default class BidList extends Component {
           <tr key={item.BudID}>
             <td>{item.Budgivare}</td>
             <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
+            <td><button style={{fontSize: '0.5rem'}} onClick={(event)=> {this.handleClick(event,item)}}>Ångra </button> </td>
           </tr>)
       });
     }
