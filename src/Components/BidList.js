@@ -45,6 +45,10 @@ export default class BidList extends Component {
             <td><button style={{fontSize: '0.5rem'}} onClick={(event)=> {this.handleClick(event,item)}}>Ångra </button> </td>
           </tr>)
       });
+
+      if (new Date(this.props.selected.SlutDatum).getTime() < new Date().getTime()) {
+        allTheBids = allTheBids[0];
+      }
     }
 
     return (
