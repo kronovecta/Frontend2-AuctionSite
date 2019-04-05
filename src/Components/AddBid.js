@@ -67,7 +67,7 @@ export default class AddBid extends Component {
 
         return (
             <div style={{borderBottom:'1px solid lightgrey'}}>
-                <form onSubmit={this.handleAddBid} style={{ width: '100%', marginBottom:'1rem' }}>
+                <form onSubmit={this.props.handleAddBid} style={{ width: '100%', marginBottom:'1rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyItems:'flex-end', flexWrap: 'wrap'}}>
                         <div style={formGroupStyle}>
                             <label style={labelStyle}>Name</label>

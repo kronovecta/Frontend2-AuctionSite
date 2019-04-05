@@ -30,7 +30,6 @@ export default class SingleAuction extends Component {
     handleAddBid = (e) => { // Generate new Bud into the API
         e.preventDefault();
         let data = {Summa: e.target.amount.value, AuktionID: this.props.data.AuktionID, Budgivare: e.target.name.value}
-        // console.log(data)
         postData(data, "bud");
     }
 
@@ -50,6 +49,9 @@ export default class SingleAuction extends Component {
             flexDirection: 'column',
             justifyContent: 'space-between'
         }
+
+        let num = typeof(1)
+        console.log(num)
 
         const Content = (
             <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding:'2rem' }}>
@@ -78,7 +80,7 @@ export default class SingleAuction extends Component {
 
                 <div style={{flex:'1', minWidth:'370px'}}>
                     <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
-                    <BidList selected={this.props.data} />
+                    <BidList selected={this.props.data} bidList={this.props.bidList} />
                 </div>
             </div>
         )
