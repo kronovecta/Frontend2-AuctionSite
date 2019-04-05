@@ -29,11 +29,13 @@ export default class AddBid extends Component {
         }
     }
 
-    postBid(data, name, amount) {
-        let object = {Budgivare: name, Summa: amount, AuktionID: data.AuktionID}
-        postData(object, "bud");
-        // console.log(object)
-    }
+    // async postBid(data, name, amount) {
+    //     let object = {Budgivare: name, Summa: amount, AuktionID: data.AuktionID}
+    //     await postData(object, "bud");
+
+    //     this.props.update();
+    //     // console.log(object)
+    // }
 
     postError(price, name) {
         let error = 'Error posting bid';

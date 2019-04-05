@@ -21,11 +21,17 @@ export default class SingleAuction extends Component {
     }
 
     async fetchBids() {
+        console.log(this.props.data.AuktionID);
         await createSession("bidList", "bud", this.props.data.AuktionID);
         let bids = await getSession("bidList")
         await this.setState({
             allBids: bids
+        }, () => {
+            console.log(bids)
+            console.log(this.state.allBids)
+
         })
+        // this.forceUpdate();
     }
 
     componentDidMount() {
@@ -66,12 +72,15 @@ export default class SingleAuction extends Component {
         }
     }
 
-    postBid(data, name, amount) {
+    async postBid(data, name, amount) {
         let object = { Budgivare: name, Summa: amount, AuktionID: data.AuktionID }
         this.setState({
             allBids: [...this.state.allBids, object]
-        }, () => { console.log(this.state.allBids) })
-        postData(object, "bud");
+        })
+        await postData(object, "bud")
+        await this.fetchBids()
+        console.log(this.state.allBids)
+
         // console.log(object)
     }
 
@@ -93,11 +102,11 @@ export default class SingleAuction extends Component {
             justifyContent: 'space-between'
         }
 
-        let num = typeof(1)
+        let num = typeof (1)
         console.log(num)
 
         const addBid = (
-            <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
+            <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} update={this.fetchBids} />
         )
 
         // let timeDiff = <Moment diff={Date.now()}>{this.props.data.SlutDatum}</Moment>
@@ -118,7 +127,7 @@ export default class SingleAuction extends Component {
                             <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
 
                             <div style={{ display: 'block' }}>
-                                
+
                                 <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
                             </div>
                             <div style={{ display: 'block' }}>

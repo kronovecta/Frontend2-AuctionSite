@@ -3,6 +3,8 @@ export async function createSession(name, type, id) {
     typeof id !== 'undefined' ? url += `/${id}` : url += ''; //kanske ger error :D
     let promise = await fetch(url);
     let data = await promise.json();
+    console.log(url);
+    console.log(await getSession("bidList"))
 
     await setSession(name, data);
 }
