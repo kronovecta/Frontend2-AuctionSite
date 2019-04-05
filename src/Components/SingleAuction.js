@@ -13,14 +13,14 @@ export default class SingleAuction extends Component {
             displayAuction: true,
             allBids: []
         }
-        
+
         this.handleClick = this.handleClick.bind(this);
         this.fetchBids = this.fetchBids.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
     }
 
     async fetchBids() {
-        await createSession("bidList", "bud", 1/*this.props.selected.AuktionID*/);
+        await createSession("bidList", "bud", this.props.data.AuktionID);
         let bids = await getSession("bidList")
         await this.setState({
             allBids: bids
@@ -38,14 +38,40 @@ export default class SingleAuction extends Component {
 
     handleCancel = (e) => {
         e.preventDefault();
-        this.setState({displayAuction: true})
+        this.setState({ displayAuction: true })
     }
 
-    handleAddBid = (e) => { // Generate new Bud into the API
+    handleAddBid = (e) => {
         e.preventDefault();
-        let data = {Summa: e.target.amount.value, AuktionID: this.props.data.AuktionID, Budgivare: e.target.name.value}
-        // console.log(data)
-        postData(data, "bud");
+        let price = false;
+        let name = false;
+
+        if (e.target.amount.value >= this.props.data.Utropspris) {
+            price = true;
+        }
+
+        if (e.target.name.value != "") {
+            name = true;
+        }
+
+        console.log(price)
+        console.log(name)
+
+        if (price === true && name === true) {
+            console.log("funkade!");
+            this.postBid(this.props.data, e.target.name.value, e.target.amount.value)
+        } else {
+            // this.postError(price, name)
+        }
+    }
+
+    postBid(data, name, amount) {
+        let object = { Budgivare: name, Summa: amount, AuktionID: data.AuktionID }
+        this.setState({
+            allBids: [...this.state.allBids, object]
+        }, () => { console.log(this.state.allBids) })
+        postData(object, "bud");
+        // console.log(object)
     }
 
     render() {
@@ -66,8 +92,8 @@ export default class SingleAuction extends Component {
         }
 
         const Content = (
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding:'2rem' }}>
-                <div style={{flex:'2', marginRight:'5vw'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
+                <div style={{ flex: '2', marginRight: '5vw' }}>
                     <div style={innerAuctionItemStyle}>
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -90,7 +116,7 @@ export default class SingleAuction extends Component {
                     </div>
                 </div>
 
-                <div style={{flex:'1', minWidth:'370px'}}>
+                <div style={{ flex: '1', minWidth: '370px' }}>
                     <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
                     <BidList selected={this.props.data} bids={this.state.allBids} />
                 </div>
