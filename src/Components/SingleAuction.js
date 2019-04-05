@@ -100,12 +100,6 @@ export default class SingleAuction extends Component {
             <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
         )
 
-        // let timeDiff = <Moment diff={Date.now()}>{this.props.data.SlutDatum}</Moment>
-        // let currentTime = <Moment date={this.props.data.SlutDatum} format="S" />
-        let diff = moment(this.props.data.SlutDatum).diff(Date.now())
-        // let diff = currentTime.diff(this.props.data.SlutDatum);
-        console.log(diff)
-
         const Content = (
             <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
                 <div style={{ flex: '2', marginRight: '5vw' }}>
