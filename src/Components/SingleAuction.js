@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BidList from './BidList'
-import { deleteData, postData } from '../api';
+import { createSession, getSession, postData } from '../api';
 import Moment from 'react-moment';
 import CreateAuction from './CreateAuction';
 import AddBid from './AddBid';
@@ -10,11 +10,25 @@ export default class SingleAuction extends Component {
         super(props)
 
         this.state = {
-            displayAuction: true
+            displayAuction: true,
+            allBids: []
         }
+        
         this.handleClick = this.handleClick.bind(this);
+        this.fetchBids = this.fetchBids.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
-        this.handleAddBid = this.handleAddBid.bind(this);
+    }
+
+    async fetchBids() {
+        await createSession("bidList", "bud", 1/*this.props.selected.AuktionID*/);
+        let bids = await getSession("bidList")
+        await this.setState({
+            allBids: bids
+        })
+    }
+
+    componentDidMount() {
+        this.fetchBids();
     }
 
     handleClick() {
@@ -80,7 +94,7 @@ export default class SingleAuction extends Component {
 
                 <div style={{flex:'1', minWidth:'370px'}}>
                     <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
-                    <BidList selected={this.props.data} bidList={this.props.bidList} />
+                    <BidList selected={this.props.data} bids={this.state.allBids} />
                 </div>
             </div>
         )

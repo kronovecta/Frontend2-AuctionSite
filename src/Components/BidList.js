@@ -8,19 +8,14 @@ export default class BidList extends Component {
     this.state = {
       allBids: []
     }
-    this.fetchBids = this.fetchBids.bind(this);
   }
 
-  async fetchBids() {
-    await createSession("bidList", "bud", 1/*this.props.selected.AuktionID*/);
-    let bids = await getSession("bidList")
-    await this.setState({
-      allBids: bids
-    })
-  }
-
-  componentDidMount() {
-    this.fetchBids();
+  componentDidUpdate(prevProps) {
+    if (this.props.bids !== prevProps.bids) {
+      this.setState({
+        allBids: this.props.bids
+      })
+    }
   }
 
   render() {
@@ -35,6 +30,7 @@ export default class BidList extends Component {
           <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
         </tr>)
     });
+
     return (
       <div className="bidList" style={{marginTop:'1.5rem'}}>
         <table>
