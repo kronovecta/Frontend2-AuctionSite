@@ -20,9 +20,7 @@ export default class BidList extends Component {
 
   render() {
     let allTheBids;
-    // console.log("utanför if "+this.state.allBids);
     if (typeof this.state.allBids !== "undefined") {
-      console.log(this.state.allBids);
       this.state.allBids.sort((a, b) => {
         return parseInt(a.Summa) - parseInt((b.Summa));
       }).reverse()

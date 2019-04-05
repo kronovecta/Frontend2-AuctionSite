@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Auction from './Auction';
-import { createSession, getSession, deleteData } from '../api';
+import { createSession, getSession } from '../api';
 
 export default class AuctionList extends Component {
     constructor(props) {
@@ -25,24 +25,31 @@ export default class AuctionList extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        
         if ((this.props.searchString !== prevProps.searchString || this.state.auctions !== prevState.auctions) && this.state.auctions != null) {
 
-            console.log(this.state.auctions);
-            let filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()));
-            filteredAuctions.sort((a, b) => {
-                return a.Titel.localeCompare(b.Titel);
-            })
-            let auctionList = filteredAuctions.map((item) => {
-                return <Auction handleAddBid={this.props.handleAddBid} /*handleDelete={this.handleDelete}*/ data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
+            let auctionList;
+            let filteredAuctions;
+            if (this.props.viewExpired) {
+                filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()));
+                filteredAuctions.sort((a, b) => {
+                    return a.Titel.localeCompare(b.Titel);
+                })
+            } else {
+                let currentDate = new Date().getTime();
+                filteredAuctions = this.state.auctions.filter(auction => auction.Titel.toLowerCase().includes(this.props.searchString.toLowerCase()) && new Date(auction.SlutDatum).getTime() >= currentDate);
+                filteredAuctions.sort((a, b) => {
+                    return a.Titel.localeCompare(b.Titel);
+                })
+            }
+
+            auctionList = filteredAuctions.map((item) => {
+                return <Auction handleAddBid={this.props.handleAddBid} data={item} key={item.AuktionID} handleToggle={this.props.handleToggle} />
             });
 
             this.setState({
                 auctionList: auctionList
             });
         }
-        // console.log(this.state.auctions);
-
     }
 
     render() {
@@ -52,8 +59,6 @@ export default class AuctionList extends Component {
             justifyContent: 'flex-start',
             flexWrap: 'wrap'
         }
-        // console.log(this.state.auctions);
-
 
         return (
             <div style={auctionItemStyle}>
