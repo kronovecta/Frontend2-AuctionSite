@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BidList from './BidList'
 import { createSession, getSession, postData } from '../api';
 import Moment from 'react-moment';
+import moment from 'moment'
 import CreateAuction from './CreateAuction';
 import AddBid from './AddBid';
 
@@ -75,6 +76,7 @@ export default class SingleAuction extends Component {
     }
 
     render() {
+        console.log(this.props.data.SlutDatum)
 
         let auctionItemStyle = {
             border: '1px solid lightgrey',
@@ -94,6 +96,16 @@ export default class SingleAuction extends Component {
         let num = typeof(1)
         console.log(num)
 
+        const addBid = (
+            <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
+        )
+
+        // let timeDiff = <Moment diff={Date.now()}>{this.props.data.SlutDatum}</Moment>
+        // let currentTime = <Moment date={this.props.data.SlutDatum} format="S" />
+        let diff = moment(this.props.data.SlutDatum).diff(Date.now())
+        // let diff = currentTime.diff(this.props.data.SlutDatum);
+        console.log(diff)
+
         const Content = (
             <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
                 <div style={{ flex: '2', marginRight: '5vw' }}>
@@ -106,10 +118,11 @@ export default class SingleAuction extends Component {
                             <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
 
                             <div style={{ display: 'block' }}>
+                                
                                 <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
                             </div>
                             <div style={{ display: 'block' }}>
-                                <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SluttDatum} />
+                                <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SlutDatum} />
                             </div>
                         </div>
                         <div style={{ background: 'rgba(255,0,0,0.1', padding: '0.5rem', display: 'flex', justifyContent: 'space-between', borderRadius: '0.3rem' }}>
@@ -120,7 +133,7 @@ export default class SingleAuction extends Component {
                 </div>
 
                 <div style={{ flex: '1', minWidth: '370px' }}>
-                    <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} />
+                    {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
                     <BidList selected={this.props.data} bids={this.state.allBids} />
                 </div>
             </div>
