@@ -3,9 +3,6 @@ export async function createSession(name, type, id) {
     typeof id !== 'undefined' ? url += `/${id}` : url += ''; //kanske ger error :D
     let promise = await fetch(url);
     let data = await promise.json();
-    console.log(url);
-    console.log(await getSession("bidList"))
-
     await setSession(name, data);
 }
 
@@ -17,10 +14,10 @@ export function getSession(json) {
     return JSON.parse(sessionStorage.getItem(json));
 }
 
-export function postData(data, type) {
+export async function postData(data, type) {
     let url = `http://nackowskis.azurewebsites.net/api/${type}/2050`;
 
-    fetch(url, {
+    await fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -28,7 +25,7 @@ export function postData(data, type) {
             'Content-Type': 'application/json'
         }
     }).then(function (data) {
-        console.log('Request success: ', 'posten skapad');
+        // console.log('Request success: ', 'posten skapad');
     })
 }
 
@@ -43,7 +40,7 @@ export function updateData(data, type) {
             'Content-Type': 'application/json'
         }
     }).then(function (data) {
-        console.log('Request success: ', 'posten skapad');
+        // console.log('Request success: ', 'posten skapad');
     })
 }
 
