@@ -22,7 +22,6 @@ export default class SingleAuction extends Component {
     }
 
     async fetchBids() {
-        console.log(this.props.data.AuktionID);
         await createSession("bidList", "bud", this.props.data.AuktionID);
         let bids = await getSession("bidList")
 
@@ -30,10 +29,7 @@ export default class SingleAuction extends Component {
             return parseInt(a.Summa) - parseInt((b.Summa));
         }).reverse()
 
-        console.log(bids)
-        console.log(sorted)
-
-        await this.setState({
+        this.setState({
             allBids: sorted
         })
         // this.forceUpdate();
@@ -52,7 +48,7 @@ export default class SingleAuction extends Component {
         e.preventDefault();
         this.setState({ displayAuction: true })
     }
-    
+
     handleReturn = () => {
 
     }
@@ -80,23 +76,24 @@ export default class SingleAuction extends Component {
 
     async postBid(data, name, amount) {
         let object = { Budgivare: name, Summa: amount, AuktionID: data.AuktionID }
-        this.setState({
-            allBids: [...this.state.allBids, object]
-        })
-        await postData(object, "bud")
-        await this.fetchBids()
-        console.log(this.state.allBids)
 
-        // console.log(object)
-        
-        
-        if(object.Summa > this.state.allBids[0].Summa) {
-            this.setState({
+        if (this.state.allBids.length === 0) { //Move to method?
+            await this.setState({
                 allBids: [...this.state.allBids, object]
-            }, () => { console.log(this.state.allBids) })
-            postData(object, "bud");
+            }, () => {
+            })
+            await postData(object, "bud")
+            await this.fetchBids()
+        } else if (object.Summa > this.state.allBids[0].Summa) {
+            await this.setState({
+                allBids: [...this.state.allBids, object]
+            }, () => {
+            })
+            await postData(object, "bud")
+            await this.fetchBids()
         } else {
-            console.log("Bid too small");
+            // console.log("Bid too small");
+            //Error handling
         }
     }
 
@@ -108,7 +105,7 @@ export default class SingleAuction extends Component {
             flexDirection: 'column',
             justifyContent: 'space-between'
         }
-        
+
         const addBid = (
             <AddBid handleAddBid={this.handleAddBid} auctionData={this.props.data} update={this.fetchBids} />
         )
@@ -120,7 +117,7 @@ export default class SingleAuction extends Component {
                     <button style={{ margin: '0 0.5rem' }} className="btn btn-warning" onClick={this.handleClick}>Update</button>
                     <button className="btn btn-danger" onClick={() => this.props.handleDelete(this.props.data)}>Remove</button>
                 </div>
-            
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'nowrap', padding: '2rem' }}>
                     <div style={{ flex: '2', marginRight: '5vw' }}>
                         <div style={innerAuctionItemStyle}>
@@ -132,7 +129,7 @@ export default class SingleAuction extends Component {
                                 <p style={{ padding: '1rem 0 1.5rem 0', borderTop: '1px solid lightgrey', borderBottom: '1px solid lightgrey' }}>{this.props.data.Beskrivning}</p>
 
                                 <div style={{ display: 'block' }}>
-                                    
+
                                     <p style={{ display: 'inline-block' }}>Start date: </p><Moment format="LLL" date={this.props.data.StartDatum} />
                                 </div>
                                 <div style={{ display: 'block' }}>

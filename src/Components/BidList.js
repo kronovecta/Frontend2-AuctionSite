@@ -12,7 +12,6 @@ export default class BidList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("uppdaterade!")
     if (this.props.bids !== prevProps.bids) {
       this.setState({
         allBids: this.props.bids
@@ -21,16 +20,14 @@ export default class BidList extends Component {
   }
 
   async handleClick(event, item){
-    console.log(item.BudID, item.Summa, item.Budgivare, item.AuktionID);
     let isToBeGone = window.confirm("Säker på att du vill ta bort?");
 
     if(isToBeGone === true){
-      console.log("Nu tas det bort");
+      await deleteData(item,"bud");
       // this.setState({
       //   allBids: await getSession("budList")
       // })
-      await deleteData(item,"bud");
-      this.props.update();
+      await this.props.update();
       // let id = item.AuktionID; 
     }
   }
