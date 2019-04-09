@@ -141,10 +141,10 @@ export default class SingleAuction extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div style={{ flex: '1', minWidth: '370px' }}>
-                    {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
-                    <BidList selected={this.props.data} bids={this.state.allBids} update={this.fetchBids} />
+                    <div style={{ flex: '1', minWidth: '370px' }}>
+                        {moment(this.props.data.SlutDatum).diff(Date.now()) >= 0 ? addBid : null}
+                        <BidList selected={this.props.data} bids={this.state.allBids} update={this.fetchBids} />
+                    </div>
                 </div>
             </React.Fragment>
 
