@@ -46,9 +46,10 @@ export default class SingleAuction extends Component {
         this.setState({ displayAuction: newState });
     }
 
-    handleCancel = (e) => {
+    handleCancel = async (e) => {
         e.preventDefault();
-        this.setState({ displayAuction: true })
+        await this.props.fetchAuctions();
+        await this.setState({ displayAuction: true })
     }
 
     handleReturn = () => {
@@ -72,7 +73,7 @@ export default class SingleAuction extends Component {
 
             this.postBid(this.props.data, e.target.name.value, e.target.amount.value)
         } else {
-            // this.postError(price, name)
+            this.postAlert("failure", "Error: Bid too small")
         }
     }
 
@@ -172,7 +173,7 @@ export default class SingleAuction extends Component {
         )
 
         return (
-            this.state.displayAuction === true ? Content : <CreateAuction handleCancel={this.handleCancel} data={this.props.data} />
+            this.state.displayAuction === true ? Content : <CreateAuction handleCancel={this.handleCancel} data={this.props.data}  />
         )
     }
 }

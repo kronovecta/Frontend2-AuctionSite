@@ -143,7 +143,7 @@ export default class CreateAuction extends Component {
                                 </div>
                             </div>
                             <div>
-                                <button className="btn btn-warning" style={{marginRight:'1rem'}} onClick={this.props.handleCancel}>Cancel</button>
+                                <button className="btn btn-warning" style={{marginRight:'1rem'}} onClick={this.props.handleCancel}>Return</button>
                                 <button className="btn btn-primary" onClick={this.handleSubmit}>Spara</button>
                             </div>
                         </div>
