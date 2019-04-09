@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import moment from 'moment'
 import CreateAuction from './CreateAuction';
 import AddBid from './AddBid';
+import ErrorMessage from './ErrorMessage'
 
 export default class SingleAuction extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class SingleAuction extends Component {
 
         this.state = {
             displayAuction: true,
-            allBids: []
+            allBids: [],
+            alert: {valid: null, type: "", message: ""}
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -78,22 +80,42 @@ export default class SingleAuction extends Component {
         let object = { Budgivare: name, Summa: amount, AuktionID: data.AuktionID }
 
         if (this.state.allBids.length === 0) { //Move to method?
-            await this.setState({
-                allBids: [...this.state.allBids, object]
-            }, () => {
-            })
-            await postData(object, "bud")
-            await this.fetchBids()
+            this.postBidSuccess(object)
+            // await this.setState({
+            //     allBids: [...this.state.allBids, object]
+            // }, () => {
+            // })
+            // await postData(object, "bud")
+            // await this.fetchBids()
         } else if (object.Summa > this.state.allBids[0].Summa) {
-            await this.setState({
-                allBids: [...this.state.allBids, object]
-            }, () => {
-            })
-            await postData(object, "bud")
-            await this.fetchBids()
+            this.postBidSuccess(object)
+            // await this.setState({
+            //     allBids: [...this.state.allBids, object]
+            // }, () => {
+            // })
+            // await postData(object, "bud")
+            // await this.fetchBids()
+            // this.postAlert("success", "Succesfully added bid")
         } else {
-            // console.log("Bid too small");
-            //Error handling
+            this.postAlert("failure", "Unable to add bid: Bid is too small")
+        }
+    }
+
+    async postBidSuccess(object) {
+        await this.setState({
+            allBids: [...this.state.allBids, object]
+        }, () => {
+        })
+        await postData(object, "bud")
+        this.postAlert("success", "Succesfully added bid")
+        await this.fetchBids()
+    }
+
+    postAlert(type, message) {
+        if(type === "failure") {
+            this.setState({alert: {valid: false, type: "danger", message: message}})
+        } else if (type === "success") {
+            this.setState({alert: {valid: true, type: "success", message: message}})
         }
     }
 
@@ -112,6 +134,8 @@ export default class SingleAuction extends Component {
 
         const Content = (
             <React.Fragment>
+                {this.state.alert.valid !== null ? <ErrorMessage type={this.state.alert.type} message={this.state.alert.message} /> : null}
+
                 <div style={{ padding: '0.5rem', display: 'flex', justifyContent: 'flex-end', borderRadius: '0.3rem' }}>
                     <form><button className="btn btn-primary" onClick={this.handleReturn}>Return</button></form>
                     <button style={{ margin: '0 0.5rem' }} className="btn btn-warning" onClick={this.handleClick}>Update</button>
