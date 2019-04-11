@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createSession, getSession,deleteData } from '../api';
+import { createSession, getSession, deleteData } from '../api';
 import './BidList.css'
 
 export default class BidList extends Component {
@@ -40,11 +40,11 @@ export default class BidList extends Component {
       }).reverse()
 
       allTheBids = this.state.allBids.map((item) => {
-        return (
-          <tr key={item.BudID}>
-            <td>{item.Budgivare}</td>
-            <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
-            <td><button style={{fontSize: '1rem',marginLeft: '1rem', color: 'red',padding:'0 0.4rem', fontWeight: 'bold'}} onClick={(event)=> {this.handleClick(event,item)}}>X</button> </td>
+        return (      
+          <tr key={item.Summa}>
+              <td>{item.Budgivare} </td>
+              <td> <span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK </td>
+              <td> <button style={{ fontSize: '1rem', marginLeft: '1rem', color: 'red', padding: '0 0.4rem', fontWeight: 'bold' }} onClick={(event) => { this.handleClick(event,item)}}>X</button></td>
           </tr>)
       });
 
