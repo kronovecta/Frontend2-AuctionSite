@@ -19,15 +19,16 @@ export default class BidList extends Component {
     }
   }
 
-  async handleClick(event, item){
+  async handleClick(event, item) {
     let isToBeGone = window.confirm("Säker på att du vill ta bort?");
 
-    if(isToBeGone === true){
-      await deleteData(item,"bud");
+    if (isToBeGone === true) {
+      await deleteData(item, "bud");
+
+      await this.props.update();
       // this.setState({
       //   allBids: await getSession("budList")
       // })
-      await this.props.update();
       // let id = item.AuktionID; 
     }
   }
@@ -40,11 +41,11 @@ export default class BidList extends Component {
       }).reverse()
 
       allTheBids = this.state.allBids.map((item) => {
-        return (      
+        return (
           <tr key={item.Summa}>
-              <td>{item.Budgivare} </td>
-              <td> <span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK </td>
-              <td> <button style={{ fontSize: '1rem', marginLeft: '1rem', color: 'red', padding: '0 0.4rem', fontWeight: 'bold' }} onClick={(event) => { this.handleClick(event,item)}}>X</button></td>
+            <td>{item.Budgivare} </td>
+            <td> <span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK </td>
+            <td> <button style={{ fontSize: '1rem', marginLeft: '1rem', color: 'red', padding: '0 0.4rem', fontWeight: 'bold' }} onClick={(event) => { this.handleClick(event, item) }}>X</button></td>
           </tr>)
       });
 
