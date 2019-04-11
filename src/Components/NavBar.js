@@ -26,7 +26,7 @@ export default class NavBar extends Component {
             width:'100%',
             padding: '2rem',
             background:'rgb(245, 245, 245)',
-            marginBottom: '1rem'
+            marginBottom: '1git arem'
         }
 
         const viewAuctions = (

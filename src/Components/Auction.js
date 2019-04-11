@@ -26,6 +26,7 @@ const Auction = ({ data, handleAddBid }) => {
                     <p style={{textAlign:'right', display:'inline-block'}}>Utgångspris: <br/><span style={{fontWeight: '600'}}>{data.Utropspris} SEK</span></p>
                 </div>
                 <p style={{padding:'1rem 0 1.5rem 0', borderTop:'1px solid lightgrey', borderBottom:'1px solid lightgrey'}}>{data.Beskrivning}</p>
+                <progress value="" max="100" />
                 <p style={{margin:'0'}}>Start: {data.StartDatum.substring(0,10)}</p>
                 <p style={{margin:'0'}}>Slut: {data.SlutDatum.substring(0,10)}</p>
                 <div style={{marginTop: '2rem'}}>
