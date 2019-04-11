@@ -1,0 +1,26 @@
+form, form > input, form > button {
+    vertical-align: middle;
+}
+
+label {
+    margin-right:1rem;
+}
+
+input, textarea {
+    padding:0.5rem 1rem;
+    border:1px solid lightgrey;
+    border-radius: 0.5rem;
+}
+
+.datePicker {
+    max-width: 150px;
+}
+
+.form-group {
+    display:block;
+    margin-bottom:1rem;
+}
+
+.form-group > label {
+    display:block;
+}
