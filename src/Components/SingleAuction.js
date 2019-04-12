@@ -14,13 +14,12 @@ export default class SingleAuction extends Component {
         this.state = {
             displayAuction: true,
             allBids: [],
-            alert: {valid: null, type: "", message: ""}
+            alert: { valid: null, type: "", message: "" }
         }
 
         this.handleClick = this.handleClick.bind(this);
         this.fetchBids = this.fetchBids.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
-        this.handleReturn = this.handleReturn.bind(this);
     }
 
     async fetchBids() {
@@ -34,7 +33,6 @@ export default class SingleAuction extends Component {
         this.setState({
             allBids: sorted
         })
-        // this.forceUpdate();
     }
 
     componentDidMount() {
@@ -50,10 +48,6 @@ export default class SingleAuction extends Component {
         e.preventDefault();
         await this.props.fetchAuctions();
         await this.setState({ displayAuction: true })
-    }
-
-    handleReturn = () => {
-
     }
 
     handleAddBid = (e) => {
@@ -113,10 +107,10 @@ export default class SingleAuction extends Component {
     }
 
     postAlert(type, message) {
-        if(type === "failure") {
-            this.setState({alert: {valid: false, type: "danger", message: message}})
+        if (type === "failure") {
+            this.setState({ alert: { valid: false, type: "danger", message: message } })
         } else if (type === "success") {
-            this.setState({alert: {valid: true, type: "success", message: message}})
+            this.setState({ alert: { valid: true, type: "success", message: message } })
         }
     }
 
@@ -175,7 +169,7 @@ export default class SingleAuction extends Component {
         )
 
         return (
-            this.state.displayAuction === true ? Content : <CreateAuction handleCancel={this.handleCancel} data={this.props.data}  />
+            this.state.displayAuction === true ? Content : <CreateAuction handleCancel={this.handleCancel} data={this.props.data} />
         )
     }
 }

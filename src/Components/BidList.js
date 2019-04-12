@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createSession, getSession,deleteData } from '../api';
+import { createSession, getSession, deleteData } from '../api';
 import './BidList.css'
 
 export default class BidList extends Component {
@@ -19,15 +19,16 @@ export default class BidList extends Component {
     }
   }
 
-  async handleClick(event, item){
+  async handleClick(event, item) {
     let isToBeGone = window.confirm("Säker på att du vill ta bort?");
 
-    if(isToBeGone === true){
-      await deleteData(item,"bud");
+    if (isToBeGone === true) {
+      await deleteData(item, "bud");
+
+      await this.props.update();
       // this.setState({
       //   allBids: await getSession("budList")
       // })
-      await this.props.update();
       // let id = item.AuktionID; 
     }
   }
@@ -41,10 +42,10 @@ export default class BidList extends Component {
 
       allTheBids = this.state.allBids.map((item) => {
         return (
-          <tr key={item.BudID}>
-            <td>{item.Budgivare}</td>
-            <td><span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK</td>
-            <td><button style={{fontSize: '1rem',marginLeft: '1rem', color: 'red',padding:'0 0.4rem', fontWeight: 'bold'}} onClick={(event)=> {this.handleClick(event,item)}}>X</button> </td>
+          <tr key={item.Summa}>
+            <td>{item.Budgivare} </td>
+            <td> <span style={{ fontWeight: '600' }}>{item.Summa}</span> SEK </td>
+            <td> <button style={{ fontSize: '1rem', marginLeft: '1rem', color: 'red', padding: '0 0.4rem', fontWeight: 'bold' }} onClick={(event) => { this.handleClick(event, item) }}>X</button></td>
           </tr>)
       });
 

@@ -17,6 +17,7 @@ export default class AuctionContainer extends Component {
   }
 
   async handleDelete(data) {
+    console.log("handleDelete")
     await deleteData(data, "Auktion");
     await this.fetchAuctions();
     await this.handleToggle(data);
@@ -24,7 +25,7 @@ export default class AuctionContainer extends Component {
 
   async fetchAuctions() {
     await createSession("auctionList", "auktion");
-    this.handleToggle(null);
+    // this.handleToggle(null);
   }
 
   handleToggle = (data) => {

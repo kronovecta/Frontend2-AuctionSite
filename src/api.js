@@ -46,12 +46,10 @@ export function updateData(data, type) {
 
 export async function deleteData(data, type) {
     let url = `http://nackowskis.azurewebsites.net/api/${type}/2050/`;
-
-    if (type === "bud") {
-        fetch(url + data.BudID, { method: 'DELETE' })
-    } else {
-        fetch(url + data.AuktionID, { method: 'DELETE' })
-    }
     
-    await createSession("auctionList", "auktion");
+    if (type === "bud") {
+        await fetch(url + data.BudID, { method: 'DELETE' })
+    } else {
+        await fetch(url + data.AuktionID, { method: 'DELETE' })
+    }
 }
