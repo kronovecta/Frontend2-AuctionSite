@@ -15,14 +15,14 @@ const Auction = ({ data, handleAddBid, handleDelete, handleToggle }) => {
             border: '1px solid lightgrey',
             borderRadius: '0.5rem',
             margin: '1rem',
-            minWidth: '300px'
+            width: '400px'
         }
     } else {
         auctionItemStyle = {
             border: '1px solid lightgrey',
             borderRadius: '0.5rem',
             margin: '1rem',
-            minWidth: '300px',
+            width: '400px',
             opacity:'0.6'
         }
     }
@@ -45,8 +45,6 @@ const Auction = ({ data, handleAddBid, handleDelete, handleToggle }) => {
             <span>Auction closed</span>
         </div>
     )
-
-
 
     return (
         <div style={auctionItemStyle} className="auctionItemStyle">

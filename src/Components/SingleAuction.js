@@ -160,6 +160,8 @@ export default class SingleAuction extends Component {
                                 <div style={{ display: 'block' }}>
                                     <p style={{ display: 'inline-block' }}>End date: </p><Moment format="LLL" date={this.props.data.SlutDatum} />
                                 </div>
+                                <div>
+                                </div>
                             </div>
                         </div>
                     </div>
